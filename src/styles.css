@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    background: #fff !important;
+    font-family: open_sansregular,Arial,Helvetica,Sans-serif;
+    color: #252525;
+    scrollbar-base-color:  #045690;
+    scrollbar-3dlight-color:  #045690;
+    scrollbar-highlight-color:  #045690;
+    scrollbar-track-color: #045690;
+    scrollbar-arrow-color: #045690;
+    scrollbar-shadow-color: #045690;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    align-items:center;
+}
+
+.card {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.row {
+    position: relative;
+}
+
+.bottom-align-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.alert.alert-daner .close {
+    color: #721c24 !important;
+}
+
+.error_message_close {
+    font-size: 20px;
+    position: relative;
+    top: -5px;
+    right: -5px;
+    color: #721c24 !important;
+}
+
+.error_message_close:hover {
+    font-size: 24px;
+    color: #721c24 !important;
+}

@@ -1,0 +1,82 @@
+<div style="height: 480px;">
+    <div>
+        <div style="padding: 0px 10px 20px 10px;width: 100%;">
+            <table id="mytableView" class="table table-striped">
+                <tr class="row">
+                    <td  class="col-md-6"> Name :</td>
+                    <td  class="col-md-6"> <input type="text" name="ORG" class="form-control" value="" [(ngModel)]="priceBookViewData.priceBookName" #priceBookName="ngModel"
+                            *ngIf="editMode">
+                        <p *ngIf="viewMode">{{ priceBookViewData.priceBookName }}</p>
+                    </td>
+            
+                </tr>
+                <tr class="row">
+                    <td class="col-md-6"> Country :</td>
+                    <td class="col-md-6"> <input type="text" name="priceBookstartDate" class="form-control" value="" [(ngModel)]="priceBookViewData.startDate" #priceBookstartDate="ngModel"
+                            *ngIf="editMode">
+                        <p *ngIf="viewMode">{{ priceBookViewData.startDate }}</p>
+                    </td>
+                </tr>
+                <tr class="row">
+                    <td  class="col-md-6"> Player Role :</td>
+                    <td  class="col-md-6"><input type="text" name="priceBookEndDate" class="form-control" value="" [(ngModel)]="priceBookViewData.endDate" #priceBookEndDate="ngModel"
+                            *ngIf="editMode">
+                        <p *ngIf="viewMode">{{ priceBookViewData.endDate }}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12 margin-bottom-20">
+            <button type="button" class="btn btn-primary pull-left" (click)="moveToAddEditPlayer('edit')()">Edit Player</button>
+            <button type="button" class="btn btn-danger pull-right" (click)="deletePlayer()">Delete Player</button>
+          </div>
+      </div>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-md-12 margin-bottom-20">
+          <button type="button" class="btn btn-success btn-block" (click)="moveToAddEditPlayer('add')" style="">Add New Player</button>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="table-responsive">
+    <table id="mytableView" class="table table-striped table-bg-myTableview">
+
+
+   
+        <tr > 
+            <th>
+                Price Book Name </th>
+            <td></td>
+           
+        </tr>
+        <tr >
+            <th>
+                Price Book - Start Date </th>
+            <td></td>
+           
+        </tr>
+        <tr >
+            <th>
+                Price Book - End Date </th>
+            <td></td>
+           
+        </tr>
+        <tr>
+            <th>
+                Active </th>
+            <td></td>
+          
+        </tr>
+        <tr>
+            <th>
+                Future </th>
+            <td></td>
+            
+        </tr>
+    </table>
+</div> -->

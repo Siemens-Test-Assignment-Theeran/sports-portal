@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "email": "theeran2k@gmail.com",
+        "role": "admin"
+    },
+    {
+        "id": 2,
+        "email": "theerankk@gmail.com",
+        "role": "user"
+    },
+    {
+        "id": 3,
+        "email": "bikram.panjikar@siemens.com",
+        "role": "admin"
+    },
+    {
+        "id": 4,
+        "email": "sanjay.mishra@siemens.com",
+        "role": "admin"
+    },
+    {
+        "id": 5,
+        "email": "singh.manish@siemens.com",
+        "role": "admin"
+    },
+    {
+        "id": 6,
+        "email": "anusuya.r.ext@siemens.com",
+        "role": "admin"
+    },
+    {
+        "id": 7,
+        "email": "admin@siemens.com",
+        "role": "admin"
+    },
+    {
+        "id": 8,
+        "email": "user@siemens.com",
+        "role": "user"
+    }
+]

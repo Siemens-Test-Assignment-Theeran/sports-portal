@@ -1,0 +1,13 @@
+<ul *ngIf="data.length">
+  <li *ngFor="let dataObj of data">
+    <a class="accordion-heading configurator" data-toggle="collapse" data-target="#configuratorNav" aria-expanded="fasle" (click)="sidebarExpand()" *ngIf="dataObj.isHeader">
+        <span class="nav-header-primary"> 
+            <i class="fa fa-cogs fa-fw"></i> {{dataObj.name}}
+        </span>
+    </a>
+    <a class="config-offers" *ngIf="!dataObj.isHeader">
+      <i class="fa fa-gift fa-fw"></i> {{dataObj.name}}<span></span>
+    </a>
+    <app-custom-tree *ngIf="dataObj['players']" [data]="dataObj['players']"></app-custom-tree>
+  </li>
+</ul>

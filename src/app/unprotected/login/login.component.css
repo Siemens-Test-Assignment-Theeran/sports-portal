@@ -1,0 +1,14 @@
+body {
+    background: #fff !important;
+    font-family: open_sansregular,Arial,Helvetica,Sans-serif;
+    color: #252525;
+    scrollbar-base-color:  #045690;
+    scrollbar-3dlight-color:  #045690;
+    scrollbar-highlight-color:  #045690;
+    scrollbar-track-color: #045690;
+    scrollbar-arrow-color: #045690;
+    scrollbar-shadow-color: #045690;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.login-page,.login-page .rounded-btn{background: #2f4050 !important;}

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-12" *ngIf="fetchPlayerFail">
+          <div class="alert alert-danger">
+              <a class="close error_message_close" data-dismiss="alert" aria-label="close" title="close"><sup>x</sup></a>
+              Fetch Players Failed!
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 column-layout">
+      <div class="pane">
+        <app-player-list [data]="playersData"></app-player-list>
+      </div>
+    </div>
+    <div class="col-md-4 column-layout">
+      <div class="pane">
+          <app-player-photo></app-player-photo>
+      </div>
+    </div>
+    <div class="col-md-4 column-layout" *ngIf="!showAddEditPane">
+      <div class="pane">
+        <app-player-detail></app-player-detail>
+      </div>
+    </div>
+    <div class="col-md-4 column-layout" *ngIf="showAddEditPane">
+      <div class="pane">
+        <app-add-edit-player></app-add-edit-player>
+      </div>
+    </div>
+  </div>
+</div>
+
+<block-ui [message]="'Loading...'">
+  <!-- Your app markup here -->
+</block-ui>
