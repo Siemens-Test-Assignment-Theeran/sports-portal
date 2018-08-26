@@ -1,3 +1,61 @@
-<p>
-  add-edit-player works!
-</p>
+<div style="height: 430px;">
+  <div>
+    <div style="padding: 0px 10px 20px 10px;width: 100%;">
+      <form class="form-signin" name="addEditPlayer" #addEditPlayerForm="ngForm" novalidate>
+        <table id="mytableView" class="table table-striped border-odd">
+          <tr class="row">
+            <td class="col-md-4"> Name </td>
+            <td class="col-md-8">
+              <input type="text" name="name" class="form-control" [(ngModel)]="addEditPlayer.name" #name="ngModel" (change)="updateSubmitData('name', addEditPlayer.name)">
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4"> Country </td>
+            <td class="col-md-8">
+              <input type="text" name="country" class="form-control" [(ngModel)]="addEditPlayer.country" #country="ngModel" (change)="updateSubmitData('country', addEditPlayer.country)">
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4"> Player Role </td>
+            <td class="col-md-8">
+              <input type="text" name="playerRole" class="form-control" [(ngModel)]="addEditPlayer.playerRole" #playerRole="ngModel" (change)="updateSubmitData('playerRole', addEditPlayer.playerRole)">
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">Upload Image </td>
+            <td class="col-lg-8 col-md-6">
+              <div class="file-field">
+                <a class="btn-floating purple-gradient mt-0 float-left">
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                  <input type="file" (change)="handleFileInput($event.target.files)">
+                </a>
+                <div>
+                  <input name="fileToUpload" class="file-path validate" type="text" [(ngModel)]="fileToUpload.name">  
+                </div>
+              </div>
+              <div *ngIf="currentFileUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                  aria-valuemin="0" aria-valuemax="100"
+                  [ngStyle]="{width:progress.percentage+'%'}">
+                  {{progress.percentage}}%</div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<div>
+  <div class="row">
+    <div class="col-md-12 margin-bottom-20">
+      <button type="button" class="btn btn-success pull-right" [disabled]="addEditPlayerForm.form.invalid" (click)="savePlayer(addEditPlayerForm)">
+        <i class="fa  fa-floppy-o"></i> Save</button>
+      <button type="button" class="btn pull-left" (click)="returnBack()">
+          <i class="fa  fa-arrow-left"></i> Back</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.contextmenu{
+    position: absolute;
+}
+
+.rightClickPanel {
+    width:200px;
+    padding:20px;
+    position:absolute;
+    border:1px solid #ccc;
+    background:#ccc;
+    display:none;
+    z-index:200;
+  }

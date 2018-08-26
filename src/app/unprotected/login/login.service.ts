@@ -21,13 +21,10 @@ export class LoginService {
 
   login(reqObj): Observable<any> {
     const getLoginResponse = this.appConfigService.url + '/' + this.appConfigService.urlConstants['SPORTS_PORTAL_LOGIN_API'];
-    console.log(getLoginResponse);
     return this.http
       .get(getLoginResponse)
       .map((response: Response) => {
-        console.log(response);
         const result = this.utilitiesService.getFilteredData(response, 'email', reqObj.email);
-        console.log(result);
         return result;
       })
       .catch(this.handleError);
@@ -45,7 +42,6 @@ export class LoginService {
   }
 
   private handleError(error: Response) {
-    console.log('here');
     return Observable.throw(error.statusText);
   }
 }

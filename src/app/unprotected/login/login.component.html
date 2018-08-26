@@ -2,14 +2,11 @@
 <div class="container h-100">
   <div class="row justify-content-center align-self-center">
     <div class="col-sm-6 col-md-4">
-      <div class="card border-info text-center">
+      <div class="card  text-center">
         <div class="card-header">
           Sports Portal
         </div>
         <div class="card-body">
-          <img src="https://placeimg.com/128/128/tech/sepia">
-          <h4 class="text-center">Hunger & Debt Ltd</h4>
-          <hr>
           <div class="row">
               <div class="col-md-12" *ngIf="loginFail">
                   <div class="alert alert-danger">
@@ -18,16 +15,17 @@
                   </div>
               </div>
           </div>
+		  <div class="login-form">
           <form class="form-signin" name="validateForm" #validateForm="ngForm" (submit)="login()" novalidate>
             <div class="form-group">
-              <!-- <divÂ class="col-md-12"> -->
+              <!-- <div class="col-md-12"> -->
               <!-- <i class="fa fa-envelope"></i> -->
               <!-- <span class="input-group-text" id="basic-addon1">@</span> -->
-              <input type="text" name="email" class="form-control" [(ngModel)]="loginData.email" [pattern]="emailPattern" required #offEmail="ngModel"
+              <input type="text" name="email" class="form-control user" [(ngModel)]="loginData.email" [pattern]="emailPattern" required #offEmail="ngModel"
                 placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
               <!-- </div> -->
             </div>
-            <div *ngIf="offEmail.invalid && (offEmail.dirty || offEmail.touched)" class="margin-bot-10">
+            <div *ngIf="offEmail.invalid && (offEmail.dirty || offEmail.touched)" class="margin-bot-10 input-error">
               <div *ngIf="offEmail.errors?.required" class="text_error">
                 <span> Email is required</span>
 
@@ -37,29 +35,31 @@
               </div>
             </div>
             <div class="form-group">
-              <!-- <divÂ class="col-md-12">
+              <!-- <div class="col-md-12">
                             <i class="fa fa-lock"></i> -->
-              <input type="password" name="password" class="form-control" [(ngModel)]="loginData.password" required #offPassword="ngModel"
+              <input type="password" name="password" class="form-control lock" [(ngModel)]="loginData.password" required #offPassword="ngModel"
                 placeholder="Password">
               <!-- </div> -->
             </div>
-            <div *ngIf="offPassword.invalid && (offPassword.dirty || offPassword.touched)" class="margin-bot-10">
+            <div *ngIf="offPassword.invalid && (offPassword.dirty || offPassword.touched)" class="margin-bot-10  input-error">
               <div *ngIf="offPassword.errors?.required" class="text_error">
                 <span> Password is required</span>
               </div>
             </div>
+			            <label class="checkbox float-left">
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
             <!-- <input type="text" class="form-control mb-2" placeholder="Email" required autofocus> 
             <input type="password" class="form-control mb-2" placeholder="Password" required>-->
             <button class="btn btn-primary btn-block mb-1" type="submit" [disabled]="validateForm.form.invalid">Sign in</button>
             <button class="btn btn-block mb-1" type="button" (click)="resetLoginData()">Reset</button>
-            <label class="checkbox float-left">
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
+
             <!-- <a href="#" class="float-right">Need help?</a> -->
           </form>
+		  </div>
         </div>
       </div>
-      <a href="#" class="float-right">Create an account </a>
+      <!-- <a href="#" class="float-right">Create an account </a> -->
     </div>
   </div>
 </div>

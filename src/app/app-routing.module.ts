@@ -7,9 +7,10 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    // { path: '', component: MainComponent, canActivate: [AuthGuard], data: { path : 'main'}},
-    { path: '', component: MainComponent},
+    { path: '', component: MainComponent, canActivate: [AuthGuard], data: { path : 'main'}},
+    // { path: '', component: MainComponent},
     { path: 'addUpdatePlayer', component: MainComponent, canActivate: [AuthGuard], data: { path : 'addUpdate'}},
+    { path: 'player/:id/:name', component: MainComponent, canActivate: [AuthGuard], data: { path : 'player'}},
     { path: '**', redirectTo: 'login' }
 ];
 

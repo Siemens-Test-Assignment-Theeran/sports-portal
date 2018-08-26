@@ -1,31 +1,47 @@
 <div class="container">
+  <br>
   <div class="row">
-      <div class="col-md-12" *ngIf="fetchPlayerFail">
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-block" (click)="logout()">
+            <i class="fa  fa-sign-out"></i> Logout</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="fetchPlayerFail">
+      <div class="col-md-12">
           <div class="alert alert-danger">
               <a class="close error_message_close" data-dismiss="alert" aria-label="close" title="close"><sup>x</sup></a>
               Fetch Players Failed!
           </div>
       </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="playerDeleted">
+      <div class="col-md-12">
+          <div class="alert alert-success">
+              <a class="close error_message_close" data-dismiss="alert" aria-label="close" title="close"><sup>x</sup></a>
+             Players Deleted Successfully!
+          </div>
+      </div>
+  </div>
+  <div class="row" *ngIf="showPanes">
     <div class="col-md-4 column-layout">
       <div class="pane">
-        <app-player-list [data]="playersData"></app-player-list>
+        <app-player-list [playersList]="playersData"></app-player-list>
       </div>
     </div>
     <div class="col-md-4 column-layout">
       <div class="pane">
-          <app-player-photo></app-player-photo>
+          <app-player-photo [selectedPlayer]="selectedPlayer"></app-player-photo>
       </div>
     </div>
     <div class="col-md-4 column-layout" *ngIf="!showAddEditPane">
       <div class="pane">
-        <app-player-detail></app-player-detail>
+        <app-player-detail [selectedPlayer]="selectedPlayer" [playersList]="playersData" (openAddEdit)="handleOpenAddEdit($event)"></app-player-detail>
       </div>
     </div>
     <div class="col-md-4 column-layout" *ngIf="showAddEditPane">
       <div class="pane">
-        <app-add-edit-player></app-add-edit-player>
+        <app-add-edit-player [selectedPlayer]="selectedPlayer" [playersList]="playersData" [mode]="addEditMode" (closeAddEdit)="handleCloseAddEdit($event)"></app-add-edit-player>
       </div>
     </div>
   </div>

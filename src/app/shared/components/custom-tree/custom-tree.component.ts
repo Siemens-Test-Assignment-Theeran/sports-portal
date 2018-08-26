@@ -1,24 +1,32 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+
+import { AppDataService } from '../../../services/app-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-tree',
   templateUrl: './custom-tree.component.html',
   styleUrls: ['./custom-tree.component.css']
 })
-export class CustomTreeComponent implements OnInit, OnChanges {
+export class CustomTreeComponent implements OnInit {
   @Input('data') data: Array<Object>;
-  private showPlayers: Object;
-  constructor() { }
 
-  ngOnInit() {
-    console.log(this.data);
+  constructor(private router: Router, private appDataService: AppDataService) { }
+
+  ngOnInit() {}
+
+  onrightClick(event, data) {
+    event.preventDefault();
+    this.appDataService.isContextMenuOpened = true;
+    this.appDataService.modifyContextMenuSelectedPlayer(data);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.data.length > 0) {
-      // this.data.map((value) => {
-      //   this.showItems['show'+value[name]] = false;
-      // });
+  handleListClick(dataObj, event) {
+    event.stopPropagation();
+    if (dataObj.isHeader) {
+      dataObj.isChildVisible = !dataObj.isChildVisible;
+    } else {
+      this.appDataService.modifySelectedPlayer(dataObj);
     }
   }
 

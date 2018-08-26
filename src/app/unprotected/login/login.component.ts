@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AmazonFirebaseSupportService } from '../../shared/guard/amazon-firebase-support.service';
 import { AppDataService } from '../../services/app-data.service';
@@ -6,6 +6,7 @@ import { Login } from './login.interface';
 import { LoginService } from './login.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import { UtilitiesService } from '../../shared/services/utilities.service';
 
 @Component({
@@ -14,10 +15,11 @@ import { UtilitiesService } from '../../shared/services/utilities.service';
   styleUrls: ['./login.component.css'],
   providers: [LoginService, AmazonFirebaseSupportService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private loginResponse: Login;
   private loginFail: Boolean;
   private inValidCredentials: string;
+  private loginSubscription: Subscription;
   private loginData: { email: string, password: string };
   constructor(
     private loginService: LoginService,
@@ -59,10 +61,9 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithSessionKey(sessionKey, reqObj) {
-    this.loginService.login(reqObj)
+    this.loginSubscription = this.loginService.login(reqObj)
       .subscribe(
         data => {
-          console.log(data);
           if (data.actionStatus === 'SUCCESS') {
             this.loginFail = false;
             this.appDataService.loginUserData = data.apiResult[0];
@@ -78,6 +79,10 @@ export class LoginComponent implements OnInit {
           return false;
         }
       );
+  }
+
+  ngOnDestroy() {
+    if (this.loginSubscription)  { this.loginSubscription.unsubscribe(); }
   }
 
 }

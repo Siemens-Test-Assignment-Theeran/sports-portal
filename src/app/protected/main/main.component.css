@@ -2,13 +2,13 @@
     border: 2px solid black;
     margin: 30px 0px;
     padding: 10px;
-    min-height: 550px;
-    height: 550px;
+    min-height: 500px;
+    height: 500px;
     
 }
 
 .column-layout{
-    min-height: 600px;
-    height: 600px;
+    min-height: 540px;
+    height: 540px;
     z-index: 100 !important;
 }

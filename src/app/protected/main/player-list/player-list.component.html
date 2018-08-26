@@ -1,46 +1,19 @@
-<div style="height: 450px; z-index: 100;">
-  <ul>
-    <li>
-      <a class="active" href="#home">Home</a>
+<div style="height: 400px; z-index: 100;" (click)="disableContextMenu()" oncontextmenu="return false;">
+  <ul class="navMenu">
+    <li style="width: 50%;">
+      <a [class]="activeClass['country']" (click)="showTreeMenu('country')">Country</a>
     </li>
-    <li>
-      <a href="#news">News</a>
-    </li>
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-    <li>
-      <a href="#about">About</a>
+    <li style="width: 50%;">
+      <a [class]="activeClass['playerRole']" (click)="showTreeMenu('playerRole')">Player Role</a>
     </li>
   </ul>
 
-  <div style="position: relative; padding:20px;margin-top:10px;background-color:#1abc9c; height:100%; overflow-y: scroll; z-index: 5;">
-    <div class="sidebar">
-      <app-custom-tree [data]="data"></app-custom-tree>
+  <div class="player-color" (contextmenu)="onrightClick($event)">
+    <div class="sidebar" #playerListContainer>
+      <app-custom-tree [data]="playersTree"></app-custom-tree>
     </div>
-    <!-- <h1>Fixed Top Navigation Bar</h1>
-    <h2>Scroll this page to see the effect</h2>
-    <h2>The navigation bar will stay at the top of the page while scrolling</h2>
-
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p>
-    <p>Some text some text some text some text..</p> -->
   </div>
+</div>
+<div *ngIf="showContextMenu">
+  <app-context-menu [x]="contextmenuX" [y]="contextmenuY" [contextmenu]="showContextMenu"></app-context-menu>
 </div>
