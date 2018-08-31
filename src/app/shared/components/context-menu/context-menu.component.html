@@ -1,4 +1,4 @@
-<div class="contextmenu" [ngStyle]="{'left.px': x, 'top.px': y}" *ngIf="contextmenu">
+<div class="contextmenu" [ngStyle]="{'left.px': x, 'top.px': y, 'position': 'absolute'}" *ngIf="contextmenu">
     <ul class="contextMenuList">
         <li class="link" (click)="openPlayer()" style="border-bottom: 1px solid #0f166c;">
             Open

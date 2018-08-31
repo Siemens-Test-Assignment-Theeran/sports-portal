@@ -29,9 +29,23 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
+.block-ui-wrapper{
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
 .img {
-  width: 16px !important;
-  height: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.imgHeader {
+  width: 24px !important;
+  height: 20px !important;
+}
+
+.tree-elements {
+  height: 30px;
 }
 
 .file-field input.file-path {

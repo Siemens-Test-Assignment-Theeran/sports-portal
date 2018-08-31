@@ -1,15 +1,15 @@
 <ul *ngIf="data.length">
-  <li *ngFor="let dataObj of data" (click)="handleListClick(dataObj, $event)" (contextmenu)="onrightClick($event, dataObj)">
+  <li *ngFor="let dataObj of data" (click)="handleListClick(dataObj, $event)" (contextmenu)="onrightClick($event, dataObj)" style="min-height: 30px !important;">
     <span *ngIf="dataObj.isHeader">
       <a class="accordion-heading configurator" data-toggle="collapse" data-target="#configuratorNav" aria-expanded="fasle">
           <span class="nav-header-primary"> 
-              <i class="fa fa-flag fa-fw"></i> {{dataObj.name}}
+            <img [src]="dataObj.srcImg" class="imgHeader" *ngIf="(dataObj.srcImg !== '')"> {{dataObj.name}}
           </span>
       </a>
     </span>
     <span *ngIf="!dataObj.isHeader">
       <a class="config-offers">
-		<img src="../assets/Cricket.png" class="img"> {{dataObj.name}}<span></span>
+		    <img [src]="dataObj.srcImg" class="img" *ngIf="(dataObj.srcImg !== '')"> {{dataObj.name}}<span></span>
       </a>
     </span>
     <app-custom-tree *ngIf="dataObj['players']" [data]="dataObj['players']" [hidden]="!dataObj.isChildVisible"></app-custom-tree>

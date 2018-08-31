@@ -10,24 +10,26 @@ import { Router } from '@angular/router';
 })
 export class CustomTreeComponent implements OnInit {
   @Input('data') data: Array<Object>;
-
+  @Input('groupBy') groupBy: string;
   constructor(private router: Router, private appDataService: AppDataService) { }
 
   ngOnInit() {}
 
   onrightClick(event, data) {
-    event.preventDefault();
-    this.appDataService.isContextMenuOpened = true;
-    this.appDataService.modifyContextMenuSelectedPlayer(data);
+    if (!data.isHeader) {
+      this.appDataService.isContextMenuOpened = true;
+      this.appDataService.selectedPlayer = data;
+    }
   }
 
   handleListClick(dataObj, event) {
-    event.stopPropagation();
     if (dataObj.isHeader) {
       dataObj.isChildVisible = !dataObj.isChildVisible;
     } else {
+      console.log(dataObj);
       this.appDataService.modifySelectedPlayer(dataObj);
     }
+    event.stopPropagation();
   }
 
 }

@@ -44,9 +44,7 @@ export class MainService {
   }
 
   addNewPlayer(playerInfo) {
-
     // The actual function to be executed is below
-
     const getLoginResponse = this.appConfigService.url + '/' + this.appConfigService.urlConstants['FETCH_ALL_PLAYERS'];
     return this.http
       .post(getLoginResponse, playerInfo)
@@ -55,16 +53,6 @@ export class MainService {
         return result;
       })
       .catch(this.handleError);
-
-      // this.amazonFirebaseSupportService.addItemToDB('/players', playerInfo);
-      // return new Observable().map(() => {
-      //   return {
-      //     'actionStatus': 'SUCCESS',
-      //     'actionResult': 'Fetched Result Successfully.',
-      //     'statusCode': 200,
-      //     'apiResult' : []
-      // };
-      // }).catch(this.handleError);
   }
 
   editPlayer(playerInfo) {
@@ -77,16 +65,6 @@ export class MainService {
         return result;
       })
       .catch(this.handleError);
-
-      // this.amazonFirebaseSupportService.updateItemToDB('/players', playerInfo, playerInfoIndex);
-      // return new Observable().map(() => {
-      //   return {
-      //     'actionStatus': 'SUCCESS',
-      //     'actionResult': 'Fetched Result Successfully.',
-      //     'statusCode': 200,
-      //     'apiResult' : []
-      // };
-      // }).catch(this.handleError);
   }
 
   reInitializeData(dataArray) {

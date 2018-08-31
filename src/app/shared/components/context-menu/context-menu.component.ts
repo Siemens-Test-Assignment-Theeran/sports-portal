@@ -17,10 +17,12 @@ export class ContextMenuComponent implements OnInit {
 
   openPlayer() {
     this.appDataService.contextMenuSelection = 'open';
+    this.appDataService.modifyContextMenuSelectedPlayer(this.appDataService.selectedPlayer);
     this.contextmenu = false;
   }
 
   deletePlayer() {
     this.appDataService.contextMenuSelection = 'delete';
+    this.appDataService.modifyContextMenuSelectedPlayer(this.appDataService.selectedPlayer);
   }
 }

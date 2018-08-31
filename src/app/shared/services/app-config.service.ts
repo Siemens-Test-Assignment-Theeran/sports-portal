@@ -7,14 +7,10 @@ export class AppConfigService implements OnInit {
   public url: string;
   public urlConstants: any;
   constructor(@Inject(DOCUMENT) private document) {
-      //  this.url = 'https://plm-services.dev.cox.com';
-      this.url = 'https://sports-portal-3888c.firebaseio.com/';
+      this.url = 'https://sports-portal-3888c.firebaseio.com';
       this.urlConstants = {
-        // "PLM_LOGIN_RESPONSE": 'plm-engine/login/v0/users/authenticate',
-        // "PLM_LOGIN_RESPONSE": 'data/login/Login_Response.json',
         'SPORTS_PORTAL_LOGIN_API': 'users.json',
-        'FETCH_ALL_PLAYERS': 'players.json',
-        'SPORTS_PORTAL_LOGOUT_API': ''
+        'FETCH_ALL_PLAYERS': 'players.json'
       };
   }
 

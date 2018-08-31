@@ -1,3 +1,4 @@
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AmazonFirebaseSupportService } from '../../shared/guard/amazon-firebase-support.service';
@@ -16,6 +17,7 @@ import { UtilitiesService } from '../../shared/services/utilities.service';
   providers: [LoginService, AmazonFirebaseSupportService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  @BlockUI() blockUI: NgBlockUI;
   private loginResponse: Login;
   private loginFail: Boolean;
   private inValidCredentials: string;
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.blockUI.start('Logging In...');
     this.loginFail = false;
     const reqObj = {
       'email': this.loginData.email,
@@ -57,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.utilitiesService.setCookie('isLoggedIn', true, 1);
         this.loginWithSessionKey(sessionKey, reqObj);
       })
-      .catch((err) => {console.log(err);});
+      .catch((err) => console.log(err));
   }
 
   loginWithSessionKey(sessionKey, reqObj) {
@@ -72,10 +75,12 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.loginFail = true;
             return false;
           }
+          this.blockUI.stop();
         },
         error => {
           console.log('Error :: ' + error);
           this.loginFail = true;
+          this.blockUI.stop();
           return false;
         }
       );

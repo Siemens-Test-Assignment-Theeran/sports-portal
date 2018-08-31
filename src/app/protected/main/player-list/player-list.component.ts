@@ -20,6 +20,17 @@ export class PlayerListComponent implements OnInit, OnDestroy {
   private showContextMenu = false;
   private activeClass: Object;
   private contextMenuSelectSubscription: Subscription;
+
+  private imageMapping = {
+    'india': '../../../../assets/india-flag-medium.png',
+    'australia': '../../../../assets/australia-flag-medium.png',
+    'southafrica': '../../../../assets/south-africa-flag-medium.png',
+    'batsman': '../../../../assets/Cricket-Bat-PNG-HD.png',
+    'bowler': '../../../../assets/cricket-ball-png-3.png',
+    'wicketkeeper': '../../../../assets/keeper-gloves.png',
+    'allrounder': '../../../../assets/all-rounder.png'
+  };
+
   constructor(private appDataService: AppDataService, private mainService: MainService) { }
 
   ngOnInit() {
@@ -28,9 +39,9 @@ export class PlayerListComponent implements OnInit, OnDestroy {
     this.contextMenuSelectSubscription = this.appDataService.contextMenuSelectedPlayer.subscribe(
       (data) => {
         if (data) {
-          const el: HTMLElement = this.playerListContainer.nativeElement as HTMLElement;
-          el.click();
-          this.disableContextMenu();
+          // const el: HTMLElement = this.playerListContainer.nativeElement as HTMLElement;
+          // el.click();
+          // this.disableContextMenu();
         }
       }
     );
@@ -45,6 +56,7 @@ export class PlayerListComponent implements OnInit, OnDestroy {
 
   showTreeMenu(groupBy) {
     this.resetActiveClass();
+    this.updateImageUrl();
     this.playersTree = this.getPlayersByGroupBy(this.playersList, groupBy);
     this.activeClass[groupBy] = 'active';
   }
@@ -69,7 +81,8 @@ export class PlayerListComponent implements OnInit, OnDestroy {
           'name': key,
           'isHeader': true,
           'isChildVisible': false,
-          'players': jsonData[key]
+          'players': jsonData[key],
+          'srcImg': this.imageMapping[key.split(' ').join('').toLowerCase()]
         };
         result.push(resultObj);
       }
@@ -79,17 +92,27 @@ export class PlayerListComponent implements OnInit, OnDestroy {
 
   // activates the menu with the coordinates
   onrightClick(event) {
-    event.preventDefault();
-    this.contextmenuX = event.clientX;
-    this.contextmenuY = event.clientY;
+    this.contextmenuX = event.clientX - 70;
+    this.contextmenuY = event.clientY - 70;
     this.contextmenu = true;
     this.showContextMenu = (this.appDataService.loginUserData.role === 'admin') ? true : false;
   }
 
   // disables the menu
-  disableContextMenu(){
+  disableContextMenu() {
     this.contextmenu = false;
     this.showContextMenu = false;
+  }
+
+  updateImageUrl() {
+    const groupByVal = this.groupBy, imageMapping = this.imageMapping;
+    this.playersList.map(function(value) {
+      if (groupByVal === 'country') {
+        value['srcImg'] = imageMapping[value['playerRole'].split(' ').join('').toLowerCase()];
+      } else if (groupByVal === 'playerRole') {
+        value['srcImg'] = imageMapping[value['country'].split(' ').join('').toLowerCase()];
+      }
+    });
   }
 
   ngOnDestroy() {

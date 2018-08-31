@@ -52,7 +52,7 @@
 <div>
   <div class="row">
     <div class="col-md-12 margin-bottom-20">
-      <button type="button" class="btn btn-success pull-right" [disabled]="addEditPlayerForm.form.invalid" (click)="savePlayer(addEditPlayerForm)">
+      <button type="button" class="btn btn-success pull-right" [disabled]="enableSaveBtn" (click)="savePlayer(addEditPlayerForm)">
         <i class="fa  fa-floppy-o"></i> Save</button>
       <button type="button" class="btn pull-left" (click)="returnBack()">
           <i class="fa  fa-arrow-left"></i> Back</button>

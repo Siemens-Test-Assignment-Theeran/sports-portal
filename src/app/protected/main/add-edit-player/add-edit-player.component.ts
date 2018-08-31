@@ -19,7 +19,7 @@ export class AddEditPlayerComponent implements OnInit, OnChanges, OnDestroy {
   @Input('mode') mode: string;
   @Input('selectedPlayer') selectedPlayer: Player;
   @Input('playersList') playersList: Player[];
-  @Output('closeAddEdit') closeAddEdit = new EventEmitter<string>();
+  @Output('closeAddEdit') closeAddEdit = new EventEmitter<boolean>();
   private addEditPlayer: Player;
   private addEditPlayerFailed: boolean;
   private fileToUpload: any;
@@ -29,16 +29,19 @@ export class AddEditPlayerComponent implements OnInit, OnChanges, OnDestroy {
   private fileUploadSubscription: Subscription;
   private addNewPlayerSubscription: Subscription;
   private editPlayerSubscription: Subscription;
+  private enableSaveBtn: boolean;
   constructor(
     private appDataService: AppDataService,
     private amazonFirebaseSupportService: AmazonFirebaseSupportService,
     private mainService: MainService,
     private utilitiesService: UtilitiesService
-  ) { }
+  ) {
+    this.fileToUpload = {};
+  }
 
   ngOnInit() {
-    this.fileToUpload = '';
     this.addEditPlayerFailed = false;
+    this.enableSaveBtn = true;
     if (this.mode === 'add') {
       this.addEditPlayer = {
         'id': 0,
@@ -60,14 +63,29 @@ export class AddEditPlayerComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedPlayer) {
       this.addEditPlayer = this.selectedPlayer;
+      this.fileToUpload.name = this.addEditPlayer.imageURL;
     }
   }
 
   updateSubmitData(key, value) {
     this.addEditPlayer[key] = value;
+    this.enableDisableSaveBtn();
+  }
+
+  validateAddEditPlayer() {
+    let someValueMissing = false;
+    for (const key in this.addEditPlayer) {
+      if (this.addEditPlayer[key] === '') {
+        someValueMissing = true;
+      }
+    }
+    return someValueMissing;
   }
 
   savePlayer(form: NgForm) {
+    if (this.validateAddEditPlayer()) {
+      return false;
+    }
     this.initializeFileUpload();
   }
 
@@ -88,6 +106,14 @@ export class AddEditPlayerComponent implements OnInit, OnChanges, OnDestroy {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.currentFileUpload = new FileUpload(this.fileToUpload);
+    this.enableDisableSaveBtn();
+  }
+
+  enableDisableSaveBtn() {
+    this.enableSaveBtn = true;
+    if (!this.validateAddEditPlayer()) {
+      this.enableSaveBtn = false;
+    }
   }
 
   addNewPlayer() {

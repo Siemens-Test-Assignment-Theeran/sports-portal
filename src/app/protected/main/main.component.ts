@@ -34,10 +34,11 @@ export class MainComponent implements OnInit, OnDestroy {
     private appDataService: AppDataService, 
     private utilitiesService: UtilitiesService, 
     private router: Router
-  ) { }
+  ) { 
+    this.initialize();
+  }
 
   ngOnInit() {
-    this.initialize();
     this.selectedPlayerSubscription = this.appDataService.selectedPlayer.subscribe(
       (playerObj) => {
         if (!this.appDataService.isContextMenuOpened) {
@@ -48,9 +49,10 @@ export class MainComponent implements OnInit, OnDestroy {
     );
     this.contextMenuSelectSubscription = this.appDataService.contextMenuSelectedPlayer.subscribe(
       (playerObj) => {
-        this.updatePlayerDetails(playerObj);
         if (this.appDataService.contextMenuSelection === 'delete') {
-          this.deletePlayer();
+          this.deletePlayer(playerObj);
+        } else if (this.appDataService.contextMenuSelection === 'open')  {
+          this.updatePlayerDetails(playerObj);
         }
         this.appDataService.isContextMenuOpened = false;
         this.showAddEditPane = false;
@@ -138,8 +140,8 @@ export class MainComponent implements OnInit, OnDestroy {
     this.router.navigate(['login']);
   }
   
-  deletePlayer() {
-    this.updatePlayerListData(this.selectedPlayer);
+  deletePlayer(playerObj) {
+    this.updatePlayerListData(playerObj);
     this.editPlayerSubscription = this.mainService.editPlayer(this.playersData).subscribe(
       data => this.handleSucccess(data),
       error => this.handleFailure(error)
